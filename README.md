@@ -9,6 +9,7 @@ O projeto implementa uma base de plataforma com:
 - Rede (VPC) com subnets por tier, NAT e endpoints.
 - Dados (RDS) com seguranca e parametros operacionais.
 - Compute (EC2) com bootstrap, IAM profile e opcional de EIP.
+- Compute elastico (EC2 Auto Scaling) com launch template e politicas de escala.
 - IAM para workloads por meio de roles padronizadas.
 - Security baseline com KMS, CloudTrail e AWS Config.
 - Storage (S3) com guardrails de seguranca e lifecycle.
@@ -22,6 +23,7 @@ Camada de composicao tecnica. Cada modulo encapsula um dominio de infraestrutura
 - vpc
 - rds
 - ec2
+- ec2-autoscaling
 - iam-role
 - iam-workload-roles
 - security-baseline
@@ -30,7 +32,7 @@ Camada de composicao tecnica. Cada modulo encapsula um dominio de infraestrutura
 ### 2) Stacks (live/client-a/<env>/<stack>)
 Camada de implementacao por ambiente:
 - Ambientes: dev, stg, prod
-- Stacks: vpc, rds, ec2, iam, security-baseline, s3
+- Stacks: vpc, rds, ec2, ec2-autoscaling, iam, security-baseline, s3
 
 ### 3) Examples (live/examples/)
 Referencias executaveis para client-a-dev-* em todos os stacks.
@@ -43,6 +45,7 @@ Sao o caminho mais rapido para clonar um novo cliente/ambiente.
 | vpc | Rede base com subnets public/private/database, NAT e endpoints | vpc |
 | rds | Banco relacional gerenciado com controles de seguranca e operacao | rds |
 | ec2 | Instancias EC2 com networking, SG, IAM profile e bootstrap | ec2 |
+| ec2-autoscaling | Grupo de Auto Scaling para EC2 com launch template e politicas de escala | ec2-autoscaling |
 | iam-role | Modulo base para criacao de uma IAM role | Interno/consumido por iam-workload-roles |
 | iam-workload-roles | Orquestra multiplas IAM roles por workload | iam |
 | security-baseline | KMS + CloudTrail + AWS Config + bucket de auditoria | security-baseline |
@@ -50,11 +53,11 @@ Sao o caminho mais rapido para clonar um novo cliente/ambiente.
 
 ## Mapa de Stacks por Ambiente
 
-| Ambiente | VPC | RDS | EC2 | IAM | Security Baseline | S3 |
-|---|---|---|---|---|---|---|
-| dev | live/client-a/dev/vpc | live/client-a/dev/rds | live/client-a/dev/ec2 | live/client-a/dev/iam | live/client-a/dev/security-baseline | live/client-a/dev/s3 |
-| stg | live/client-a/stg/vpc | live/client-a/stg/rds | live/client-a/stg/ec2 | live/client-a/stg/iam | live/client-a/stg/security-baseline | live/client-a/stg/s3 |
-| prod | live/client-a/prod/vpc | live/client-a/prod/rds | live/client-a/prod/ec2 | live/client-a/prod/iam | live/client-a/prod/security-baseline | live/client-a/prod/s3 |
+| Ambiente | VPC | RDS | EC2 | EC2 Auto Scaling | IAM | Security Baseline | S3 |
+|---|---|---|---|---|---|---|---|
+| dev | live/client-a/dev/vpc | live/client-a/dev/rds | live/client-a/dev/ec2 | live/client-a/dev/ec2-autoscaling | live/client-a/dev/iam | live/client-a/dev/security-baseline | live/client-a/dev/s3 |
+| stg | live/client-a/stg/vpc | live/client-a/stg/rds | live/client-a/stg/ec2 | live/client-a/stg/ec2-autoscaling | live/client-a/stg/iam | live/client-a/stg/security-baseline | live/client-a/stg/s3 |
+| prod | live/client-a/prod/vpc | live/client-a/prod/rds | live/client-a/prod/ec2 | live/client-a/prod/ec2-autoscaling | live/client-a/prod/iam | live/client-a/prod/security-baseline | live/client-a/prod/s3 |
 
 ## Ordem Recomendada de Provisionamento
 
@@ -64,8 +67,9 @@ Sao o caminho mais rapido para clonar um novo cliente/ambiente.
 4. s3
 5. rds
 6. ec2
+7. ec2-autoscaling
 
-Observacao: rds e ec2 normalmente consomem informacoes da vpc.
+Observacao: rds, ec2 e ec2-autoscaling normalmente consomem informacoes da vpc.
 
 ## Como Executar um Stack
 

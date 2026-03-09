@@ -311,6 +311,70 @@ variable "listener_certificate_arn" {
   default     = null
 }
 
+variable "create_acm_certificate" {
+  description = "Create ACM certificate in this module and attach it to HTTPS listener."
+  type        = bool
+  default     = false
+}
+
+variable "acm_domain_name" {
+  description = "Primary domain name for ACM certificate created by this module."
+  type        = string
+  default     = null
+}
+
+variable "acm_subject_alternative_names" {
+  description = "Optional SAN entries for ACM certificate."
+  type        = list(string)
+  default     = []
+}
+
+variable "acm_validation_method" {
+  description = "Validation method used by ACM certificate (DNS or EMAIL)."
+  type        = string
+  default     = "DNS"
+
+  validation {
+    condition     = contains(["DNS", "EMAIL"], upper(var.acm_validation_method))
+    error_message = "acm_validation_method must be DNS or EMAIL."
+  }
+}
+
+variable "acm_hosted_zone_id" {
+  description = "Route53 hosted zone ID used to create DNS validation records."
+  type        = string
+  default     = null
+}
+
+variable "acm_create_route53_records" {
+  description = "Whether to create Route53 DNS validation records for ACM."
+  type        = bool
+  default     = true
+}
+
+variable "acm_validation_record_ttl" {
+  description = "TTL in seconds for ACM DNS validation records."
+  type        = number
+  default     = 60
+
+  validation {
+    condition     = var.acm_validation_record_ttl >= 1 && var.acm_validation_record_ttl <= 172800
+    error_message = "acm_validation_record_ttl must be between 1 and 172800."
+  }
+}
+
+variable "acm_wait_for_validation" {
+  description = "Whether Terraform should wait for ACM certificate validation."
+  type        = bool
+  default     = true
+}
+
+variable "acm_certificate_tags" {
+  description = "Additional tags applied only to ACM certificate."
+  type        = map(string)
+  default     = {}
+}
+
 variable "listener_default_action_type" {
   description = "Default listener action type (forward, redirect, fixed-response)."
   type        = string

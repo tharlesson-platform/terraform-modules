@@ -3,6 +3,10 @@ locals {
   target_group_name  = coalesce(var.target_group_name, "${var.name}-tg")
 
   resolved_target_group_arn = coalesce(try(aws_lb_target_group.this[0].arn, null), var.target_group_arn)
+  resolved_listener_certificate_arn = coalesce(
+    try(module.acm[0].certificate_arn, null),
+    var.listener_certificate_arn
+  )
 
   target_attachments = {
     for index, attachment in var.target_attachments :
@@ -14,6 +18,20 @@ locals {
     Module    = "alb"
     Workload  = var.name
   })
+}
+
+check "acm_domain_name_is_required_when_create_acm_certificate_is_enabled" {
+  assert {
+    condition     = !var.create_acm_certificate || var.acm_domain_name != null
+    error_message = "acm_domain_name is required when create_acm_certificate is true."
+  }
+}
+
+check "acm_creation_and_explicit_listener_certificate_are_mutually_exclusive" {
+  assert {
+    condition     = !(var.create_acm_certificate && var.listener_certificate_arn != null)
+    error_message = "Use create_acm_certificate or listener_certificate_arn, but not both."
+  }
 }
 
 check "subnet_count_is_valid" {
@@ -50,8 +68,8 @@ check "forward_action_target_group_is_resolvable" {
 
 check "https_listener_requires_certificate" {
   assert {
-    condition     = upper(var.listener_protocol) != "HTTPS" || var.listener_certificate_arn != null
-    error_message = "listener_certificate_arn is required when listener_protocol is HTTPS."
+    condition     = upper(var.listener_protocol) != "HTTPS" || local.resolved_listener_certificate_arn != null
+    error_message = "HTTPS listener requires a certificate ARN from listener_certificate_arn or ACM module."
   }
 }
 
@@ -133,11 +151,27 @@ resource "aws_lb_target_group" "this" {
   })
 }
 
+module "acm" {
+  count = var.create_acm_certificate ? 1 : 0
+
+  source = "../acm"
+
+  domain_name               = var.acm_domain_name
+  subject_alternative_names = var.acm_subject_alternative_names
+  validation_method         = var.acm_validation_method
+  hosted_zone_id            = var.acm_hosted_zone_id
+  create_route53_records    = var.acm_create_route53_records
+  validation_record_ttl     = var.acm_validation_record_ttl
+  wait_for_validation       = var.acm_wait_for_validation
+  tags                      = var.tags
+  certificate_tags          = var.acm_certificate_tags
+}
+
 resource "aws_lb_listener" "this" {
   load_balancer_arn = aws_lb.this.arn
   port              = var.listener_port
   protocol          = upper(var.listener_protocol)
-  certificate_arn   = upper(var.listener_protocol) == "HTTPS" ? var.listener_certificate_arn : null
+  certificate_arn   = upper(var.listener_protocol) == "HTTPS" ? local.resolved_listener_certificate_arn : null
   ssl_policy = upper(var.listener_protocol) == "HTTPS" ? coalesce(
     var.listener_ssl_policy,
     "ELBSecurityPolicy-TLS13-1-2-2021-06"

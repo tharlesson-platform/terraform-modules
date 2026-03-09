@@ -22,6 +22,7 @@ Essa estrutura permite evolucao progressiva: comecar por um exemplo, promover pa
 ### 1) Modulos (modules/)
 Camada de composicao tecnica. Cada modulo encapsula um dominio de infraestrutura:
 - vpc
+- acm
 - alb
 - elb
 - rds
@@ -46,6 +47,7 @@ Sao o caminho mais rapido para clonar um novo cliente/ambiente.
 | Modulo | Objetivo | Consumido por stacks |
 |---|---|---|
 | vpc | Rede base com subnets public/private/database, NAT e endpoints | vpc |
+| acm | Certificados TLS com validacao DNS/EMAIL e Route53 opcional | Disponivel para stacks web/app e `alb` |
 | alb | Application Load Balancer com listener, target group e health check | Disponivel para stacks web/app |
 | elb | Classic ELB com listeners e health check | Disponivel para stacks legados |
 | rds | Banco relacional gerenciado com controles de seguranca e operacao | rds |
@@ -69,11 +71,12 @@ Sao o caminho mais rapido para clonar um novo cliente/ambiente.
 1. security-baseline
 2. iam
 3. vpc
-4. alb/elb (quando aplicavel)
-5. s3
-6. rds
-7. ec2
-8. ec2-autoscaling
+4. acm (quando aplicavel)
+5. alb/elb (quando aplicavel)
+6. s3
+7. rds
+8. ec2
+9. ec2-autoscaling
 
 Observacao: rds, ec2 e ec2-autoscaling normalmente consomem informacoes da vpc.
 

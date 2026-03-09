@@ -1,0 +1,5 @@
+# Default code owner for all files in this repository.
+* @tharlesson
+
+# Protect this file itself with the same owner.
+/.github/CODEOWNERS @tharlesson

@@ -11,6 +11,7 @@ Cada ambiente possui os stacks:
 - ec2
 - ec2-autoscaling
 - ecs
+- eks
 - iam
 - security-baseline
 - s3

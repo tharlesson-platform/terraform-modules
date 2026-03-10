@@ -6,6 +6,7 @@ Este diretorio contem exemplos executaveis para client-a-dev:
 - client-a-dev-ec2
 - client-a-dev-ec2-autoscaling
 - client-a-dev-ecs
+- client-a-dev-eks
 - client-a-dev-iam
 - client-a-dev-security-baseline
 - client-a-dev-s3

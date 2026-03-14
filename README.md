@@ -102,7 +102,8 @@ terraform apply
 - Tagging padrao por stack via locals.common_tags.
 - Configuracao por ambiente em terraform.tfvars.
 - Provider com suporte a profile e assume_role (pronto para uso multi-conta por stack/ambiente).
-- Backend remoto parametrizado por backend.hcl.
+- Backend remoto parametrizado por backend.hcl (S3).
+- State locking via lock file no S3 (`use_lockfile = true`, arquivo `.tflock`).
 - backend.hcl e .terraform/ ignorados por git para evitar vazamento de contexto local.
 
 ## Estrategia para Novos Clientes
@@ -110,7 +111,7 @@ terraform apply
 1. Copiar stack de live/examples/client-a-dev-<stack>.
 2. Renomear caminhos para o novo cliente/ambiente.
 3. Ajustar terraform.tfvars.
-4. Ajustar backend.hcl (bucket/key/table).
+4. Ajustar backend.hcl (bucket/key/region).
 5. Executar init, plan, apply.
 
 ## Documentacao Local

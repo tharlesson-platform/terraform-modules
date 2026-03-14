@@ -28,7 +28,7 @@ Exemplo funcional do stack **ec2** em contexto **client-a / dev**.
 ## How to Use This Example
 1. Copie o diretorio para um novo contexto (cliente/ambiente).
 2. Ajuste `terraform.tfvars`.
-3. Ajuste `backend.hcl`.
+3. Ajuste `backend.hcl` (bucket/key/region; lock via `.tflock` no S3).
 4. Rode Terraform.
 
 ```bash

@@ -45,5 +45,5 @@ terraform apply
 ```
 
 ## Operational Notes
-- Ajuste `backend.hcl` para bucket/key/table corretos antes da primeira execucao.
+- Ajuste `backend.hcl` para bucket/key/region corretos antes da primeira execucao; o lock agora usa `.tflock` no S3.
 - Revise `terraform.tfvars` (subnets, VPC, dominio ACM e hosted zone) antes de aplicar.

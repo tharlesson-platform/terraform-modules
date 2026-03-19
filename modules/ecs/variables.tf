@@ -99,6 +99,23 @@ variable "container_secrets" {
   default = []
 }
 
+variable "container_definitions_json" {
+  description = "Optional raw JSON for task definition container_definitions. When set, it overrides generated container settings."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.container_definitions_json == null || can(jsondecode(var.container_definitions_json))
+    error_message = "container_definitions_json must be valid JSON when provided."
+  }
+}
+
+variable "task_definition_volumes" {
+  description = "Optional ECS task definition volumes. Supports host_path and efs_volume_configuration."
+  type        = any
+  default     = []
+}
+
 variable "container_health_check" {
   description = "Optional health check for primary container."
   type = object({

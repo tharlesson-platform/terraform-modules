@@ -12,6 +12,12 @@ Provisiona workload em ECS com service Fargate/EC2, task definition, IAM roles e
 - `module.alb` opcional, com suporte a ACM via modulo `acm`.
 - Autoscaling opcional para desired count com politicas de CPU e memoria.
 
+## Module Layout
+- `main.tf`: dados compartilhados, `locals` e `checks` de consistencia.
+- `cluster.tf`: recursos de cluster ECS.
+- `task.tf`: task definition, CloudWatch Logs e IAM de task/execution.
+- `service.tf`: service ECS, security groups, ALB e autoscaling.
+
 ## Key Inputs
 - `name`, `container_image`, `service_subnet_ids`
 - `create_cluster`/`existing_cluster_arn`

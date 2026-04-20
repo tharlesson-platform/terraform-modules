@@ -97,6 +97,25 @@ terraform plan
 terraform apply
 ```
 
+## Ferramenta CLI complementar
+
+Para reforcar seguranca de mudanca e governanca antes do `apply`, o ecossistema agora inclui o repositorio irmao `terraform-pr-risk-analyzer`.
+
+Ele complementa este blueprint com:
+
+- leitura de `terraform plan -json`;
+- score operacional por ambiente;
+- deteccao de destroys, replaces e mudancas perigosas em IAM, networking, RDS, ECS, EKS, ALB, Route53, KMS e Secrets;
+- saida markdown/json para PR, pipeline e revisao tecnica.
+
+Fluxo sugerido:
+
+```bash
+terraform plan -out plan.out
+terraform show -json plan.out > plan.json
+terraform-pr-risk-analyzer analyze --plan plan.json --environment prod --fail-above 70
+```
+
 ## Convencoes Operacionais
 
 - Tagging padrao por stack via locals.common_tags.

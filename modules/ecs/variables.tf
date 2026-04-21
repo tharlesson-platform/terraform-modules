@@ -128,7 +128,7 @@ variable "container_health_check" {
   default = null
 
   validation {
-    condition     = var.container_health_check == null || length(var.container_health_check.command) > 0
+    condition     = var.container_health_check == null ? true : length(var.container_health_check.command) > 0
     error_message = "container_health_check.command must contain at least one command token."
   }
 }
@@ -655,7 +655,7 @@ variable "alb_protocol_version" {
   default     = null
 
   validation {
-    condition = var.alb_protocol_version == null || contains([
+    condition = var.alb_protocol_version == null ? true : contains([
       "HTTP1",
       "HTTP2",
       "GRPC"

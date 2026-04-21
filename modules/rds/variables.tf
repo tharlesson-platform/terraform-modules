@@ -346,7 +346,7 @@ variable "parameters" {
   validation {
     condition = alltrue([
       for parameter in var.parameters : (
-        parameter.apply_method == null || contains(["immediate", "pending-reboot"], lower(parameter.apply_method))
+        parameter.apply_method == null ? true : contains(["immediate", "pending-reboot"], lower(parameter.apply_method))
       )
     ])
     error_message = "parameters.apply_method must be immediate or pending-reboot when provided."

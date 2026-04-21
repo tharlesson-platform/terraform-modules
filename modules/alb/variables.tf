@@ -139,7 +139,7 @@ variable "protocol_version" {
   default     = null
 
   validation {
-    condition = var.protocol_version == null || contains([
+    condition = var.protocol_version == null ? true : contains([
       "HTTP1",
       "HTTP2",
       "GRPC"
@@ -228,7 +228,7 @@ variable "health_check_protocol" {
   default     = null
 
   validation {
-    condition     = var.health_check_protocol == null || contains(["HTTP", "HTTPS"], upper(var.health_check_protocol))
+    condition     = var.health_check_protocol == null ? true : contains(["HTTP", "HTTPS"], upper(var.health_check_protocol))
     error_message = "health_check_protocol must be HTTP, HTTPS, or null."
   }
 }

@@ -1,0 +1,104 @@
+name: terraform-ci
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  TF_INPUT: "false"
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.6.6"
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.6.6"
+
+      - name: Validate modules and live examples
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          directories=(
+            modules/acm
+            modules/alb
+            modules/ec2
+            modules/ec2-autoscaling
+            modules/ecs
+            modules/eks
+            modules/elb
+            modules/iam-role
+            modules/iam-workload-roles
+            modules/rds
+            modules/s3
+            modules/security-baseline
+            modules/vpc
+            live/examples/client-a-dev-ec2
+            live/examples/client-a-dev-ec2-autoscaling
+            live/examples/client-a-dev-ecs
+            live/examples/client-a-dev-eks
+            live/examples/client-a-dev-iam
+            live/examples/client-a-dev-rds
+            live/examples/client-a-dev-s3
+            live/examples/client-a-dev-security-baseline
+            live/examples/client-a-dev-vpc
+          )
+
+          for dir in "${directories[@]}"; do
+            echo "==> validating ${dir}"
+            terraform -chdir="${dir}" init -backend=false -input=false -no-color
+            terraform -chdir="${dir}" validate -no-color
+          done
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check README coverage for modules and examples
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+
+          while IFS= read -r dir; do
+            if [[ ! -f "${dir}/README.md" ]]; then
+              echo "Missing README.md in ${dir}"
+              missing=1
+            fi
+          done < <(find modules -mindepth 1 -maxdepth 1 -type d | sort)
+
+          while IFS= read -r dir; do
+            if [[ ! -f "${dir}/README.md" ]]; then
+              echo "Missing README.md in ${dir}"
+              missing=1
+            fi
+          done < <(find live/examples -mindepth 1 -maxdepth 1 -type d | sort)
+
+          exit "${missing}"

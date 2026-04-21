@@ -12,6 +12,8 @@ O projeto implementa uma base de plataforma com:
 - Compute elastico (EC2 Auto Scaling) com launch template e politicas de escala.
 - Compute containerizado (ECS) com service, task definition, autoscaling e integracao com ALB/ACM.
 - Compute Kubernetes (EKS) com cluster gerenciado, node groups, OIDC e integracao com ALB/ACM.
+- Registro de imagens com ECR para stacks GitOps e workloads containerizados.
+- Plataforma Azure opinativa com AKS, ACR, Key Vault, PostgreSQL e identidade para External Secrets.
 - Balanceamento de carga com modulos de ELB classico e ALB com target groups e health check.
 - IAM para workloads por meio de roles padronizadas.
 - Security baseline com KMS, CloudTrail e AWS Config.
@@ -28,12 +30,14 @@ Camada de composicao tecnica. Cada modulo encapsula um dominio de infraestrutura
 - alb
 - elb
 - eks
+- ecr
 - rds
 - ec2
 - ec2-autoscaling
 - ecs
 - iam-role
 - iam-workload-roles
+- platform-gitops-azure
 - security-baseline
 - s3
 
@@ -55,12 +59,14 @@ No estado atual, os examples sao somente dev; stg/prod sao promovidos a partir d
 | alb | Application Load Balancer com listener, target group e health check | Consumido por composicoes em `ecs`/`eks` ou por stacks custom |
 | elb | Classic ELB com listeners e health check | Modulo disponivel para stacks legados/custom |
 | eks | EKS com cluster, node groups, IAM, OIDC e composicao opcional de ALB/ACM | eks |
+| ecr | Registro de imagens container com scan on push e lifecycle | stacks custom/GitOps |
 | rds | Banco relacional gerenciado com controles de seguranca e operacao | rds |
 | ec2 | Instancias EC2 com networking, SG, IAM profile e bootstrap | ec2 |
 | ec2-autoscaling | Grupo de Auto Scaling para EC2 com launch template e politicas de escala | ec2-autoscaling |
 | ecs | ECS com service, task definition, autoscaling e composicao opcional de ALB/ACM | ecs |
 | iam-role | Modulo base para criacao de uma IAM role | Interno/consumido por iam-workload-roles |
 | iam-workload-roles | Orquestra multiplas IAM roles por workload | iam |
+| platform-gitops-azure | Base Azure com AKS, ACR, Key Vault, PostgreSQL e identidade para ESO | stacks GitOps em Azure |
 | security-baseline | KMS + CloudTrail + AWS Config + bucket de auditoria | security-baseline |
 | s3 | Bucket S3 com controles de seguranca e configuracoes operacionais | s3 |
 
@@ -174,5 +180,5 @@ Ao reutilizar ou derivar este material:
 - documente alteracoes relevantes feitas sobre a base original
 
 ## Autor
-**Tharlesson**  
+**Tharlesson**
 GitHub: https://github.com/tharlesson

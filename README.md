@@ -97,6 +97,15 @@ terraform plan
 terraform apply
 ```
 
+## Validacao automatizada
+
+O repositorio agora possui uma pipeline dedicada para:
+
+- `terraform fmt -check -recursive`;
+- validacao de todos os modulos em `modules/`;
+- validacao dos exemplos executaveis em `live/examples/`;
+- cobertura minima de documentacao com `README.md` por modulo e exemplo.
+
 ## Ferramenta CLI complementar
 
 Para reforcar seguranca de mudanca e governanca antes do `apply`, o ecossistema agora inclui o repositorio irmao `terraform-pr-risk-analyzer`.

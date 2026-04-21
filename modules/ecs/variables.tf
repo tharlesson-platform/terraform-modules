@@ -655,7 +655,7 @@ variable "alb_protocol_version" {
   default     = null
 
   validation {
-    condition = var.alb_protocol_version == null || contains([
+    condition = var.alb_protocol_version == null ? true : contains([
       "HTTP1",
       "HTTP2",
       "GRPC"

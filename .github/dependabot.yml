@@ -1,0 +1,345 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/ec2"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/ec2-autoscaling"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/ecs"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/eks"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/iam"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/rds"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/s3"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/security-baseline"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/dev/vpc"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/ec2"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/ec2-autoscaling"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/ecs"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/eks"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/iam"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/rds"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/s3"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/security-baseline"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/prod/vpc"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/ec2"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/ec2-autoscaling"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/ecs"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/eks"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/iam"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/rds"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/s3"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/security-baseline"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/client-a/stg/vpc"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-ec2"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-ec2-autoscaling"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-ecs"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-eks"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-iam"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-rds"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-s3"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-security-baseline"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/live/examples/client-a-dev-vpc"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/acm"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/alb"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/ec2"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/ec2-autoscaling"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/ecs"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/eks"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/elb"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/iam-role"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/iam-workload-roles"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/rds"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/s3"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/security-baseline"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "terraform"
+    directory: "/modules/vpc"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5

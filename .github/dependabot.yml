@@ -7,6 +7,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/ec2-autoscaling"
     schedule:
@@ -14,6 +19,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/ecs"
     schedule:
@@ -21,6 +31,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/eks"
     schedule:
@@ -28,6 +43,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/iam"
     schedule:
@@ -35,6 +55,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/rds"
     schedule:
@@ -42,6 +67,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/s3"
     schedule:
@@ -49,6 +79,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/security-baseline"
     schedule:
@@ -56,6 +91,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/dev/vpc"
     schedule:
@@ -63,6 +103,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/ec2"
     schedule:
@@ -70,6 +115,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/ec2-autoscaling"
     schedule:
@@ -77,6 +127,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/ecs"
     schedule:
@@ -84,6 +139,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/eks"
     schedule:
@@ -91,6 +151,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/iam"
     schedule:
@@ -98,6 +163,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/rds"
     schedule:
@@ -105,6 +175,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/s3"
     schedule:
@@ -112,6 +187,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/security-baseline"
     schedule:
@@ -119,6 +199,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/prod/vpc"
     schedule:
@@ -126,6 +211,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/ec2"
     schedule:
@@ -133,6 +223,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/ec2-autoscaling"
     schedule:
@@ -140,6 +235,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/ecs"
     schedule:
@@ -147,6 +247,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/eks"
     schedule:
@@ -154,6 +259,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/iam"
     schedule:
@@ -161,6 +271,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/rds"
     schedule:
@@ -168,6 +283,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/s3"
     schedule:
@@ -175,6 +295,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/security-baseline"
     schedule:
@@ -182,6 +307,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/client-a/stg/vpc"
     schedule:
@@ -189,6 +319,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-ec2"
     schedule:
@@ -196,6 +331,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-ec2-autoscaling"
     schedule:
@@ -203,6 +343,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-ecs"
     schedule:
@@ -210,6 +355,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-eks"
     schedule:
@@ -217,6 +367,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-iam"
     schedule:
@@ -224,6 +379,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-rds"
     schedule:
@@ -231,6 +391,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-s3"
     schedule:
@@ -238,6 +403,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-security-baseline"
     schedule:
@@ -245,6 +415,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/live/examples/client-a-dev-vpc"
     schedule:
@@ -252,6 +427,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/acm"
     schedule:
@@ -259,6 +439,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/alb"
     schedule:
@@ -266,6 +451,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/ec2"
     schedule:
@@ -273,6 +463,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/ec2-autoscaling"
     schedule:
@@ -280,6 +475,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/ecs"
     schedule:
@@ -287,6 +487,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/eks"
     schedule:
@@ -294,6 +499,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/elb"
     schedule:
@@ -301,6 +511,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/iam-role"
     schedule:
@@ -308,6 +523,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/iam-workload-roles"
     schedule:
@@ -315,6 +535,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/rds"
     schedule:
@@ -322,6 +547,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/s3"
     schedule:
@@ -329,6 +559,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/security-baseline"
     schedule:
@@ -336,6 +571,11 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
   - package-ecosystem: "terraform"
     directory: "/modules/vpc"
     schedule:
@@ -343,3 +583,8 @@ updates:
       time: "09:00"
       timezone: "America/Sao_Paulo"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch

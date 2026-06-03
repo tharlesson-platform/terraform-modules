@@ -132,9 +132,9 @@ resource "azurerm_kubernetes_cluster" "this" {
   sku_tier            = var.aks_sku_tier
 
   default_node_pool {
-    name                = "system"
-    vm_size             = var.node_vm_size
-    vnet_subnet_id      = azurerm_subnet.aks.id
+    name                 = "system"
+    vm_size              = var.node_vm_size
+    vnet_subnet_id       = azurerm_subnet.aks.id
     orchestrator_version = var.kubernetes_version
     auto_scaling_enabled = var.enable_auto_scaling
     node_count           = var.enable_auto_scaling ? null : var.node_count

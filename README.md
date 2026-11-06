@@ -182,3 +182,34 @@ Ao reutilizar ou derivar este material:
 ## Autor
 **Tharlesson**
 GitHub: https://github.com/tharlesson
+
+## CI de validação local isolada
+
+Os jobs `terraform-ci / fmt`, `validate`, `docs` e `guardrails` usam a label
+exclusiva `terraform-modules-run-${{ github.run_id }}`, com timeout de 20 minutos.
+Gatilhos push em master/main e PR, permissões contents: read, a lista explícita
+original dos 22 roots e os comandos de fmt/validate/docs são preservados.
+Checkout usa commit completo da action, head exato do PR ou SHA do push e
+persist-credentials: false. O controlador separado precisa revisar e admitir
+repo/workflow/job/evento/SHA exatos; este patch não instala perfil nem cria autoridade.
+
+Cada job exige marker em VM Linux ARM64 e nega mounts compartilhados, SSH agent,
+credenciais/perfis AWS e variáveis do gateway local de artifacts. Metadata AWS
+é desativada e arquivos de configuração/credenciais AWS são /dev/null.
+Terraform 1.10.0 Linux ARM64 é baixado do endpoint oficial, com SHA256 fixo
+verificado antes da extração e instalação apenas em RUNNER_TEMP, sem sudo.
+
+Fmt recursivo, init -backend=false -input=false -no-color e validate -no-color
+continuam iguais em todos os 22 módulos/exemplos listados. O job docs mantém
+checagem de README em todos os módulos e exemplos. Não há plan/apply/deploy
+nesta CI; fontes Terraform, locks, exemplos e instruções de operação existentes
+permanecem intactos e nenhum recurso cloud é consultado/provisionado nesta migração.
+
+Provas nativas usam Terraform Darwin ARM64 de mesma versão, verificado por SHA256,
+em cópia descartável com HOME, TF_DATA_DIR por root e caches próprios. O ambiente
+é uma whitelist sem AWS/SSO herdados, com arquivos AWS nulos e metadata off;
+~/.aws do usuário não é lido. Downloads públicos de providers podem ocorrer:
+não se declara sandbox de rede nem execução Linux ARM64 real nesta etapa.
+Sem Docker/VM, API write, Root/runtime, commit/push ou alteração Code Quality.
+Revisão independente Main antes de publicar; rollback desta fase é não
+publicar/admitir a fonte. Escopo: dois workflows e este README.

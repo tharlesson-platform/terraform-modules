@@ -13,40 +13,111 @@ permissions:
 env:
   TF_INPUT: "false"
   TERRAFORM_VERSION: "1.10.0"
+  SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  TF_IN_AUTOMATION: "true"
+  AWS_EC2_METADATA_DISABLED: "true"
+  AWS_SHARED_CREDENTIALS_FILE: /dev/null
+  AWS_CONFIG_FILE: /dev/null
 
 jobs:
   fmt:
-    runs-on: ubuntu-latest
+    runs-on: ["terraform-modules-run-${{ github.run_id }}"]
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
 
-      - name: Set up Terraform
+      - name: Verify exact source and isolated guest
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-          unzip -q /tmp/terraform.zip -d /tmp
-          sudo mv /tmp/terraform /usr/local/bin/terraform
-          terraform version
+          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -f /opt/isolation-base-ready
+          test ! -L /opt/isolation-base-ready
+          test "$(uname -s)" = Linux
+          test "$(uname -m)" = aarch64
+          test -z "${SSH_AUTH_SOCK:-}"
+          test -z "${LOCAL_ARTIFACT_TOKEN:-}"
+          test -z "${LOCAL_ARTIFACT_URL:-}"
+          for credential in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_WEB_IDENTITY_TOKEN_FILE AWS_CONTAINER_CREDENTIALS_FULL_URI AWS_CONTAINER_CREDENTIALS_RELATIVE_URI AWS_PROFILE AWS_DEFAULT_PROFILE; do
+            test -z "${!credential:-}"
+          done
+          mount_inventory=$(findmnt --raw --noheadings --output FSTYPE)
+          test -n "$mount_inventory"
+          while IFS= read -r filesystem; do
+            case "$filesystem" in
+              9p|virtiofs|nfs|nfs4|cifs|smbfs|fuse.sshfs|""|*[!A-Za-z0-9_.-]*) exit 1 ;;
+            esac
+          done <<< "$mount_inventory"
+
+      - name: Install verified Terraform for Linux ARM64
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$TERRAFORM_VERSION" = 1.10.0
+          tool_directory=$(mktemp -d "$RUNNER_TEMP/terraform-modules-tool.XXXXXXXX")
+          curl --fail --location --proto '=https' --tlsv1.2 --retry 2 --max-time 180 \
+            --output "$tool_directory/tool.zip" https://releases.hashicorp.com/terraform/1.10.0/terraform_1.10.0_linux_arm64.zip
+          printf '%s  %s\n' 'e12fad357bcff9537e904a7821529206c2c8fb48f700b670c25d6deddbb65d05' "$tool_directory/tool.zip" | sha256sum --check --strict
+          unzip -q "$tool_directory/tool.zip" terraform -d "$tool_directory"
+          chmod 0755 "$tool_directory/terraform"
+          "$tool_directory/terraform" version -json | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["terraform_version"]=="1.10.0" and d["platform"]=="linux_arm64"'
+          printf '%s\n' "$tool_directory" >> "$GITHUB_PATH"
 
       - name: Check formatting
         run: terraform fmt -check -recursive
 
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ["terraform-modules-run-${{ github.run_id }}"]
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
 
-      - name: Set up Terraform
+      - name: Verify exact source and isolated guest
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-          unzip -q /tmp/terraform.zip -d /tmp
-          sudo mv /tmp/terraform /usr/local/bin/terraform
-          terraform version
+          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -f /opt/isolation-base-ready
+          test ! -L /opt/isolation-base-ready
+          test "$(uname -s)" = Linux
+          test "$(uname -m)" = aarch64
+          test -z "${SSH_AUTH_SOCK:-}"
+          test -z "${LOCAL_ARTIFACT_TOKEN:-}"
+          test -z "${LOCAL_ARTIFACT_URL:-}"
+          for credential in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_WEB_IDENTITY_TOKEN_FILE AWS_CONTAINER_CREDENTIALS_FULL_URI AWS_CONTAINER_CREDENTIALS_RELATIVE_URI AWS_PROFILE AWS_DEFAULT_PROFILE; do
+            test -z "${!credential:-}"
+          done
+          mount_inventory=$(findmnt --raw --noheadings --output FSTYPE)
+          test -n "$mount_inventory"
+          while IFS= read -r filesystem; do
+            case "$filesystem" in
+              9p|virtiofs|nfs|nfs4|cifs|smbfs|fuse.sshfs|""|*[!A-Za-z0-9_.-]*) exit 1 ;;
+            esac
+          done <<< "$mount_inventory"
+
+      - name: Install verified Terraform for Linux ARM64
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$TERRAFORM_VERSION" = 1.10.0
+          tool_directory=$(mktemp -d "$RUNNER_TEMP/terraform-modules-tool.XXXXXXXX")
+          curl --fail --location --proto '=https' --tlsv1.2 --retry 2 --max-time 180 \
+            --output "$tool_directory/tool.zip" https://releases.hashicorp.com/terraform/1.10.0/terraform_1.10.0_linux_arm64.zip
+          printf '%s  %s\n' 'e12fad357bcff9537e904a7821529206c2c8fb48f700b670c25d6deddbb65d05' "$tool_directory/tool.zip" | sha256sum --check --strict
+          unzip -q "$tool_directory/tool.zip" terraform -d "$tool_directory"
+          chmod 0755 "$tool_directory/terraform"
+          "$tool_directory/terraform" version -json | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["terraform_version"]=="1.10.0" and d["platform"]=="linux_arm64"'
+          printf '%s\n' "$tool_directory" >> "$GITHUB_PATH"
 
       - name: Validate modules and live examples
         shell: bash
@@ -85,10 +156,38 @@ jobs:
           done
 
   docs:
-    runs-on: ubuntu-latest
+    runs-on: ["terraform-modules-run-${{ github.run_id }}"]
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+
+      - name: Verify exact source and isolated guest
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -f /opt/isolation-base-ready
+          test ! -L /opt/isolation-base-ready
+          test "$(uname -s)" = Linux
+          test "$(uname -m)" = aarch64
+          test -z "${SSH_AUTH_SOCK:-}"
+          test -z "${LOCAL_ARTIFACT_TOKEN:-}"
+          test -z "${LOCAL_ARTIFACT_URL:-}"
+          for credential in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_WEB_IDENTITY_TOKEN_FILE AWS_CONTAINER_CREDENTIALS_FULL_URI AWS_CONTAINER_CREDENTIALS_RELATIVE_URI AWS_PROFILE AWS_DEFAULT_PROFILE; do
+            test -z "${!credential:-}"
+          done
+          mount_inventory=$(findmnt --raw --noheadings --output FSTYPE)
+          test -n "$mount_inventory"
+          while IFS= read -r filesystem; do
+            case "$filesystem" in
+              9p|virtiofs|nfs|nfs4|cifs|smbfs|fuse.sshfs|""|*[!A-Za-z0-9_.-]*) exit 1 ;;
+            esac
+          done <<< "$mount_inventory"
 
       - name: Check README coverage for modules and examples
         shell: bash
